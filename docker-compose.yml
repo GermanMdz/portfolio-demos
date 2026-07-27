@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  gateway:
+    image: nginx:stable
+    container_name: portfolio_gateway
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - portfolio_network
+    depends_on:
+      - inscripcion-ferias
+
+  inscripcion-ferias:
+    build:
+      context: ./demos/inscripcion-ferias
+    container_name: inscripcion_ferias
+    networks:
+      - portfolio_network
+    expose:
+      - "80"
+
+networks:
+  portfolio_network:
+    driver: bridge
+
+# Nota:
+# - Cada demo tendrá su propio servicio/stack que se añadirá posteriormente.
+# - El gateway enruta las rutas /demos/<nombre> hacia los servicios correspondientes.
