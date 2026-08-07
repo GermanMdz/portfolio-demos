@@ -6,6 +6,11 @@ Cada demo debe ubicarse en `demos/<nombre-del-proyecto>` y contener:
 - `Dockerfile` o definición de servicio en `docker-compose.yml` si requiere contenedor.
 - Archivos estáticos y código de la demo.
 
+Demos disponibles:
+
+- `inscripcion-ferias`: inscripción mock a una feria y listado de usuarios.
+- `ia`: dibujo y predicción de números manuscritos mediante un modelo MNIST.
+
 Reglas esenciales:
 1. No modificar otras demos existentes.
 2. Mantener la interfaz lo más cercana posible al proyecto original.

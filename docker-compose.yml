@@ -13,6 +13,7 @@ services:
       - portfolio_network
     depends_on:
       - inscripcion-ferias
+      - ia
 
   inscripcion-ferias:
     build:
@@ -22,6 +23,15 @@ services:
       - portfolio_network
     expose:
       - "80"
+
+  ia:
+    build:
+      context: ./demos/ia
+    container_name: portfolio_ia
+    networks:
+      - portfolio_network
+    expose:
+      - "5000"
 
 networks:
   portfolio_network:

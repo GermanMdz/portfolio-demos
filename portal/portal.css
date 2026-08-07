@@ -60,6 +60,7 @@ body.modal-open { overflow: hidden; }
 .demo-button span { margin-left: 18px; font-size: 18px; }
 .project-mark { display: flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, var(--lime), #e2e9c2); font-size: 100px; font-weight: 800; }
 .project-mark span { transform: rotate(-10deg); }
+.project-mark-ai { background: linear-gradient(135deg, #7b2f67, #c58bb5); }
 footer { padding: 26px 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; text-align: center; }
 footer span { padding: 0 8px; color: var(--accent); }
 

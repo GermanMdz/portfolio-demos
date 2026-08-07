@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clasificador de números manuscritos</title>
+    <link rel="stylesheet" href="/demos/ia/static/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <h1>Escribe un número de un dígito</h1>
+      <p class="intro">Dibujá un número en el recuadro y dejá que el modelo lo reconozca.</p>
+      <section class="drawing-panel" aria-label="Área de dibujo y predicción">
+        <div class="canvas-frame">
+          <canvas id="drawing-canvas" width="280" height="280" aria-label="Canvas para dibujar un número"></canvas>
+        </div>
+        <div class="button-container">
+          <button id="predict-button" type="button">Predecir</button>
+          <button id="clear-button" type="button">Borrar</button>
+        </div>
+        <p id="prediction" class="prediction" aria-live="polite">Cargando modelo...</p>
+      </section>
+    </main>
+    <script src="/demos/ia/static/app.js"></script>
+  </body>
+</html>

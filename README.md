@@ -41,6 +41,13 @@ portfolio-demos/
     │   ├── index.html
     │   ├── style.css
     │   └── src/
+    ├── ia/
+    │   ├── Dockerfile
+    │   ├── README.md
+    │   ├── app.py
+    │   ├── model/
+    │   ├── templates/
+    │   └── static/
     └── (aquí añadiremos demos individuales)
 ```
 
