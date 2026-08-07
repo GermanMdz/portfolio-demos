@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Demos interactivas de proyectos personales." />
+    <title>Portfolio Demos</title>
+    <link rel="stylesheet" href="/portal.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Portfolio Demos">PORTFOLIO<span>DEMOS</span></a>
+      <span class="header-note">Backend Developer</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">Proyectos personales</p>
+        <h1>Experiencias que podés probar.</h1>
+        <p class="intro-copy">Una selección de demos interactivas para explorar el valor de cada proyecto en pocos minutos.</p>
+      </section>
+
+      <section class="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <h2 id="projects-title">Demos disponibles</h2>
+          <span>01 proyecto</span>
+        </div>
+
+        <article class="project-card">
+          <div class="project-index">01</div>
+          <div class="project-content">
+            <p class="project-type">Gestión municipal</p>
+            <h2>Inscripción de Ferias</h2>
+            <p>Experiencia reducida para inscribirse a una feria y consultar los participantes registrados desde la vista de administración.</p>
+            <div class="tags"><span>Roles</span><span>Inscripciones</span><span>Mock data</span></div>
+            <button class="demo-button" id="open-demo" type="button">Ver demo <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="project-mark" aria-hidden="true"><span>F</span></div>
+        </article>
+      </section>
+    </main>
+
+    <footer>portfolio-demos <span>·</span> demos interactivas para portfolio profesional</footer>
+
+    <div class="modal" id="demo-modal" hidden aria-labelledby="modal-title" aria-modal="true" role="dialog">
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-panel">
+        <div class="modal-header">
+          <div><p class="eyebrow">Demo interactiva</p><h2 id="modal-title">Inscripción de Ferias</h2></div>
+          <div class="modal-actions">
+            <button class="refresh-button" id="refresh-demo" type="button" aria-label="Refrescar demo" title="Refrescar demo">↻</button>
+            <button class="close-button" id="close-demo" type="button" aria-label="Cerrar demo" title="Cerrar demo">×</button>
+          </div>
+        </div>
+        <iframe id="demo-frame" title="Demo de Inscripción de Ferias" src="about:blank"></iframe>
+      </section>
+    </div>
+
+    <script src="/portal.js"></script>
+  </body>
+</html>

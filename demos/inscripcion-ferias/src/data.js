@@ -4,7 +4,8 @@ export const FERIA = {
   resumen: "Una feria de emprendedores locales con artesanías, gastronomía y espectáculos.",
   fecha: "Sábado 22/11/2025",
   horario: "16:00 - 20:00",
-  ubicacion: "Plaza Alem, Vicente López",
+  direccion: "Plaza Alem, Carregal y Marconi, Munro",
+  imagen: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1000&q=85",
 };
 
 export const INSCRIPTOS = [

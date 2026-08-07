@@ -16,14 +16,21 @@ Arranque
 Instalar Docker y Docker Compose en la máquina y ejecutar:
 
 ```bash
-docker compose up
+docker compose up --build
 ```
+
+Abrir el portal principal en [http://localhost:8080](http://localhost:8080). Desde la página principal,
+cada proyecto se muestra en una card y su demo se abre dentro de un popup interactivo.
 
 Estructura inicial
 ```
 portfolio-demos/
 ├── README.md
 ├── docker-compose.yml
+├── portal/
+│   ├── index.html
+│   ├── portal.css
+│   └── portal.js
 ├── nginx/
 │   └── nginx.conf
 └── demos/

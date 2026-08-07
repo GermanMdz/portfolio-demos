@@ -1,6 +1,6 @@
 import { FERIA, INSCRIPTOS } from "../data.js";
 import { renderFeriaPage } from "./feria/page.js";
-import { renderListadoInscriptos } from "../../components/ListadoInscriptos.js";
+import { renderListadoInscriptos } from "../components/ListadoInscriptos.js";
 
 const root = document.getElementById("root");
 const basePath = "/demos/inscripcion-ferias";
@@ -72,33 +72,33 @@ function handleBackToFeria() {
 
 function renderLoginPage() {
   root.innerHTML = `
-    <div class="page-shell">
-      <section class="hero">
-        <div class="hero-content">
-          <div>
-            <span class="small-pill">Demo profesional</span>
-            <h1 class="hero-title">Inscripción de Ferias</h1>
-            <p class="hero-copy">Selecciona tu modo de acceso para ver la experiencia de usuario o la vista de administrador.</p>
-          </div>
-          <div class="card field-card">
-            <p class="section-title">Iniciar sesión</p>
-            <div class="button-group">
-              <button class="button-solid" id="user-login">Ingresar como usuario</button>
-              <button class="button-secondary" id="admin-login">Ingresar como admin</button>
-            </div>
-          </div>
+    <main class="login-page">
+      <section class="login-welcome">
+        <div class="login-welcome-content">
+          <p class="login-brand">INSCRIPCIÓN DE FERIAS</p>
+          <h1>¡Bienvenido nuevamente!</h1>
+          <p>Aquí puedes iniciar sesión y realizar tus inscripciones de manera rápida y sencilla.</p>
         </div>
       </section>
 
-      <section class="section card field-card">
-        <p class="section-title">Qué verás</p>
-        <ul>
-          <li>👉 Usuario: página de feria con botón de inscripción.</li>
-          <li>👉 Admin: misma pantalla con botón de ver inscriptos.</li>
-          <li>👉 Inscripciones ficticias en la lista de admin.</li>
-        </ul>
+      <section class="login-form-panel">
+        <div class="login-form-content">
+          <h2>Iniciar sesión</h2>
+          <p class="login-form-copy">Elegí cómo querés acceder a la demo</p>
+          <div class="login-role-actions">
+            <button class="login-role-button" id="user-login" type="button">
+              <span class="login-role-icon">👤</span>
+              <span><strong>Ingresar como usuario</strong><small>Inscribite en la feria</small></span>
+            </button>
+            <button class="login-role-button" id="admin-login" type="button">
+              <span class="login-role-icon">⚙️</span>
+              <span><strong>Ingresar como admin</strong><small>Consultá los inscriptos</small></span>
+            </button>
+          </div>
+          <p class="login-demo-note">Acceso de demostración sin credenciales reales.</p>
+        </div>
       </section>
-    </div>
+    </main>
   `;
 
   document.getElementById("user-login").addEventListener("click", () => {
