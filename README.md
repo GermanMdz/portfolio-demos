@@ -22,6 +22,22 @@ docker compose up --build
 Abrir el portal principal en [http://localhost:8080](http://localhost:8080). Desde la página principal,
 cada proyecto se muestra en una card y su demo se abre dentro de un popup interactivo.
 
+El portal también puede verse sin Docker sirviendo únicamente la carpeta `portal/`:
+
+```bash
+python -m http.server 4173 --directory portal
+```
+
+Abrir [http://localhost:4173](http://localhost:4173). En este modo el portfolio se verá,
+pero las demos no estarán disponibles hasta levantar Docker.
+
+Publicación del portal en Vercel
+- Root Directory: `portal`
+- Framework Preset: `Other`
+- Build Command: vacío
+- Output Directory: `.`
+- Antes de publicar, cambiar `portal/config.js` para apuntar a la URL pública de la VPS.
+
 Estructura inicial
 ```
 portfolio-demos/

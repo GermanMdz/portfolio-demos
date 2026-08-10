@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/demos/ia",
+      "destination": "https://plumaged-cullen-unrash.ngrok-free.dev/demos/ia"
+    },
+    {
+      "source": "/demos/ia/:path*",
+      "destination": "https://plumaged-cullen-unrash.ngrok-free.dev/demos/ia/:path*"
+    },
+    {
+      "source": "/demos/inscripcion-ferias",
+      "destination": "https://plumaged-cullen-unrash.ngrok-free.dev/demos/inscripcion-ferias"
+    },
+    {
+      "source": "/demos/inscripcion-ferias/:path*",
+      "destination": "https://plumaged-cullen-unrash.ngrok-free.dev/demos/inscripcion-ferias/:path*"
+    }
+  ]
+}
