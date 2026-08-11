@@ -36,7 +36,7 @@ function refreshDemo() {
   showDemoLoading();
   frame.src = `${activeDemoUrl}?refresh=${Date.now()}`;
   refreshButton.classList.add("is-refreshing");
-  window.setTimeout(() => refreshButton.classList.remove("is-refreshing"), 420);
+  window.setTimeout(() => refreshButton.classList.remove("is-refreshing"), 600);
   availabilityTimer = window.setTimeout(showDemoUnavailable, 7000);
 }
 
@@ -72,9 +72,11 @@ openButtons.forEach((button) => {
     openDemo();
   });
 });
+
 refreshButton.addEventListener("click", refreshDemo);
 closeButton.addEventListener("click", closeDemo);
 modal.querySelector("[data-close-modal]").addEventListener("click", closeDemo);
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !modal.hidden) closeDemo();
 });
