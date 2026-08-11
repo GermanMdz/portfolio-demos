@@ -1,189 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Germán Mendoza - Backend Developer. Portfolio con demos interactivas." />
-  <title>Germán Mendoza - Backend Developer</title>
-  <link rel="stylesheet" href="/portal.css" />
-</head>
-<body>
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <h1 class="hero-name">Germán Mendoza</h1>
-          <p class="hero-title">Backend Developer</p>
-          <p class="hero-description">Construyo software enfocado en backend, APIs y sistemas que resuelven problemas reales.</p>
-          <div class="hero-links">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div class="hero-indicator" aria-hidden="true">
-          <span>Proyectos</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 3 14 10 6 17"></polyline>
-          </svg>
-        </div>
-      </div>
-    </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Demos interactivas de proyectos personales." />
+    <title>Portfolio Demos</title>
+    <link rel="stylesheet" href="/portal.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Portfolio Demos">PORTFOLIO<span>DEMOS</span></a>
+      <span class="header-note">Backend Developer</span>
+    </header>
 
-    <!-- PROJECTS / DEMOS -->
-    <section class="projects" id="projects">
-      <div class="projects-inner">
-        <div class="section-label">Trabajo</div>
-        <h2 class="section-title">Demos disponibles</h2>
-        
-        <!-- DEMO 1: INSCRIPCION A FERIAS -->
-        <article class="project-item">
-          <div class="project-number">01</div>
-          <div class="project-main">
-            <h3 class="project-title">Sistema de Inscripción a Ferias Municipales</h3>
-            <p class="project-description">Sistema desarrollado para gestionar la inscripción de emprendedores y participantes a ferias municipales, centralizando la información y el proceso de registro.</p>
-            <div class="project-actions">
-              <button class="btn btn-primary" data-demo-url="/demos/inscripcion-ferias/" data-demo-title="Sistema de Inscripción a Ferias Municipales" type="button">Ver demo</button>
-              <a href="https://github.com" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Ver código</a>
-            </div>
-            <div class="tech-stack">
-              <span class="tech-tag" title="Next.js">Next.js</span>
-              <span class="tech-tag" title="React">React</span>
-              <span class="tech-tag" title="TypeScript">TypeScript</span>
-              <span class="tech-tag" title="Node.js">Node.js</span>
-              <span class="tech-tag" title="PostgreSQL">PostgreSQL</span>
-            </div>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">Proyectos personales</p>
+        <h1>Experiencias que podés probar.</h1>
+        <p class="intro-copy">Una selección de demos interactivas para explorar el valor de cada proyecto en pocos minutos.</p>
+      </section>
+
+      <section class="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <h2 id="projects-title">Demos disponibles</h2>
+          <span>02 proyectos</span>
+        </div>
+
+        <article class="project-card">
+          <div class="project-index">01</div>
+          <div class="project-content">
+            <p class="project-type">Gestión municipal</p>
+            <h2>Inscripción de Ferias</h2>
+            <p>Experiencia reducida para inscribirse a una feria y consultar los participantes registrados desde la vista de administración.</p>
+            <div class="tags"><span>Roles</span><span>Inscripciones</span><span>Mock data</span></div>
+            <button class="demo-button" data-demo-url="/demos/inscripcion-ferias/" data-demo-title="Inscripción de Ferias" type="button">Ver demo <span aria-hidden="true">↗</span></button>
           </div>
+          <div class="project-mark" aria-hidden="true"><span>F</span></div>
         </article>
 
-        <!-- DEMO 2: CLASIFICADOR DE NÚMEROS -->
-        <article class="project-item">
-          <div class="project-number">02</div>
-          <div class="project-main">
-            <h3 class="project-title">Clasificador de Números Manuscritos</h3>
-            <p class="project-description">Modelo de machine learning desarrollado en Python capaz de reconocer números escritos a mano a partir de sus características. La demo permite dibujar/probar números manuscritos y observar la predicción del modelo.</p>
-            <div class="project-actions">
-              <button class="btn btn-primary" data-demo-url="/demos/ia/" data-demo-title="Clasificador de Números Manuscritos" type="button">Ver demo</button>
-              <a href="https://github.com" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Ver código</a>
-            </div>
-            <div class="tech-stack">
-              <span class="tech-tag" title="Python">Python</span>
-              <span class="tech-tag" title="NumPy">NumPy</span>
-              <span class="tech-tag" title="Matplotlib">Matplotlib</span>
-            </div>
+        <article class="project-card">
+          <div class="project-index">02</div>
+          <div class="project-content">
+            <p class="project-type">Inteligencia artificial</p>
+            <h2>Reconocimiento de números</h2>
+            <p>Dibujá un número manuscrito y probá un clasificador entrenado con MNIST que procesa el trazo y devuelve su predicción.</p>
+            <div class="tags"><span>IA</span><span>MNIST</span><span>Predicción</span></div>
+            <button class="demo-button" data-demo-url="/demos/ia/" data-demo-title="Reconocimiento de números" type="button">Ver demo <span aria-hidden="true">↗</span></button>
           </div>
+          <div class="project-mark project-mark-ai" aria-hidden="true"><span>AI</span></div>
         </article>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- PORTFOLIO ARCHITECTURE -->
-    <section class="architecture" id="architecture">
-      <div class="architecture-inner">
-        <div class="section-label">Proceso</div>
-        <h2 class="section-title">Cómo construí este portfolio</h2>
-        <p class="section-description">Este sitio no es una plantilla. Diseñé una arquitectura pensada para ser extensible y reproducible.</p>
+    <footer>portfolio-demos <span>·</span> demos interactivas para portfolio profesional</footer>
 
-        <!-- FLOW DIAGRAM -->
-        <div class="flow-diagram">
-          <div class="flow-step">
-            <div class="flow-icon">📦</div>
-            <div class="flow-text">
-              <strong>Proyectos originales</strong>
-              <span>Cada demo parte de un proyecto real del repositorio</span>
-            </div>
-          </div>
-
-          <div class="flow-connector"></div>
-
-          <div class="flow-step">
-            <div class="flow-icon">✂️</div>
-            <div class="flow-text">
-              <strong>Demos aisladas</strong>
-              <span>Extraigo la funcionalidad relevante y la preparo como demo independiente</span>
-            </div>
-          </div>
-
-          <div class="flow-connector"></div>
-
-          <div class="flow-step">
-            <div class="flow-icon">🐳</div>
-            <div class="flow-text">
-              <strong>Containerización</strong>
-              <span>Cada demo se ejecuta en su propio contenedor con todo lo que necesita</span>
-            </div>
-          </div>
-
-          <div class="flow-connector"></div>
-
-          <div class="flow-step">
-            <div class="flow-icon">🌐</div>
-            <div class="flow-text">
-              <strong>Deployment</strong>
-              <span>Todos los contenedores se despliegan bajo una única URL</span>
-            </div>
-          </div>
-
-          <div class="flow-connector"></div>
-
-          <div class="flow-step">
-            <div class="flow-icon">🎯</div>
-            <div class="flow-text">
-              <strong>Portfolio</strong>
-              <span>El sitio accede a las demos y las presenta en iframes</span>
-            </div>
+    <div class="modal" id="demo-modal" hidden aria-labelledby="modal-title" aria-modal="true" role="dialog">
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-panel">
+        <div class="modal-header">
+          <div><p class="eyebrow">Demo interactiva</p><h2 id="modal-title">Inscripción de Ferias</h2></div>
+          <div class="modal-actions">
+            <button class="refresh-button" id="refresh-demo" type="button" aria-label="Refrescar demo" title="Refrescar demo">↻</button>
+            <button class="close-button" id="close-demo" type="button" aria-label="Cerrar demo" title="Cerrar demo">×</button>
           </div>
         </div>
+        <div class="demo-status" id="demo-status" hidden></div>
+        <iframe id="demo-frame" title="Demo de Inscripción de Ferias" src="about:blank"></iframe>
+      </section>
+    </div>
 
-        <!-- ARCHITECTURE NOTES -->
-        <div class="architecture-notes">
-          <div class="note">
-            <h4>Generación asistida</h4>
-            <p>Para cada proyecto, le proporcioné a herramientas de IA el repositorio original junto con una descripción clara de qué debía mostrar la demo. A partir de esa información preparé demos reducidas que se integran fácilmente a la arquitectura.</p>
-          </div>
-          <div class="note">
-            <h4>Extensible por diseño</h4>
-            <p>Agregar un nuevo proyecto/demostración es reproducible. El sistema está preparado para escalar sin rehacer la arquitectura base.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="contact-inner">
-        <h2 class="contact-title">¿Hablamos?</h2>
-        <p class="contact-description">Si querés conversar sobre una oportunidad, podés contactarme.</p>
-        <div class="contact-info">
-          <a href="tel:+5491234567890" class="contact-link">
-            <span class="contact-label">Teléfono</span>
-            <span class="contact-value">+54 9 1234 567890</span>
-          </a>
-          <a href="mailto:german@example.com" class="contact-link">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">german@example.com</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- DEMO MODAL -->
-  <div class="modal" id="demo-modal" hidden aria-labelledby="modal-title" aria-modal="true" role="dialog">
-    <div class="modal-backdrop" data-close-modal></div>
-    <section class="modal-panel">
-      <div class="modal-header">
-        <h2 id="modal-title">Demo</h2>
-        <div class="modal-actions">
-          <button class="modal-btn refresh-btn" id="refresh-demo" type="button" aria-label="Refrescar demo" title="Refrescar demo">↻</button>
-          <button class="modal-btn close-btn" id="close-demo" type="button" aria-label="Cerrar demo" title="Cerrar demo">×</button>
-        </div>
-      </div>
-      <div class="demo-status" id="demo-status" hidden></div>
-      <iframe id="demo-frame" title="Demo" src="about:blank"></iframe>
-    </section>
-  </div>
-
-  <script src="/config.js"></script>
-  <script src="/portal.js"></script>
-</body>
+    <script src="/config.js"></script>
+    <script src="/portal.js"></script>
+  </body>
 </html>
