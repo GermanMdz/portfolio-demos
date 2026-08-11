@@ -13,6 +13,8 @@ function getDemoUrl(path) {
   return `${demosOrigin}${path}`;
 }
 
+fetch("/demos/warmup").catch(() => {});
+
 function showDemoLoading() {
   demoStatus.hidden = false;
   demoStatus.className = "demo-status loading";

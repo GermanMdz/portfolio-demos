@@ -1,16 +1,12 @@
-version: "3.8"
-
 services:
   gateway:
     image: nginx:stable
-    container_name: portfolio_gateway
+    "x-google-cloudrun:ingress-container": true
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./portal:/usr/share/nginx/html:ro
-    networks:
-      - portfolio_network
     depends_on:
       - inscripcion-ferias
       - ia
@@ -18,25 +14,11 @@ services:
   inscripcion-ferias:
     build:
       context: ./demos/inscripcion-ferias
-    container_name: inscripcion_ferias
-    networks:
-      - portfolio_network
     expose:
-      - "80"
+      - "5001"
 
   ia:
     build:
       context: ./demos/ia
-    container_name: portfolio_ia
-    networks:
-      - portfolio_network
     expose:
       - "5000"
-
-networks:
-  portfolio_network:
-    driver: bridge
-
-# Nota:
-# - Cada demo tendrá su propio servicio/stack que se añadirá posteriormente.
-# - El gateway enruta las rutas /demos/<nombre> hacia los servicios correspondientes.

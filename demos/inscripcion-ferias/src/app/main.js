@@ -3,7 +3,9 @@ import { renderFeriaPage } from "./feria/page.js";
 import { renderListadoInscriptos } from "../components/ListadoInscriptos.js";
 
 const root = document.getElementById("root");
-const basePath = "/demos/inscripcion-ferias";
+const basePath = window.location.pathname.startsWith("/demos/inscripcion-ferias")
+  ? "/demos/inscripcion-ferias"
+  : "";
 
 const state = {
   role: null,

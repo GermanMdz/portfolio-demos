@@ -1,7 +1,6 @@
-/*
- * Local default: the Docker gateway running on this computer.
- * Before deploying the portal, replace this value with the public VPS URL.
- */
+/* The deployed portal and both demos share this single Cloud Run service. */
 window.PORTFOLIO_CONFIG = {
-  demosOrigin: "https://plumaged-cullen-unrash.ngrok-free.dev",
+  demosOrigin: window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "",
 };
