@@ -10,6 +10,7 @@ services:
     depends_on:
       - inscripcion-ferias
       - ia
+      - http-server
 
   inscripcion-ferias:
     build:
@@ -22,3 +23,9 @@ services:
       context: ./demos/ia
     expose:
       - "5000"
+
+  http-server:
+    build:
+      context: ./demos/http-server
+    expose:
+      - "5002"

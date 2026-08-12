@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTTP Playground</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <div class="panel panel-left">
+        <header class="panel-header">
+          <div class="title-wrap">
+            <span class="dot dot-green"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-red"></span>
+          </div>
+          <h1>HTTP PLAYGROUND</h1>
+        </header>
+
+        <div class="action-tabs" role="tablist" aria-label="HTTP actions">
+          <button class="tab is-active" type="button" data-action="echo">Echo</button>
+          <button class="tab" type="button" data-action="create-file">Create File</button>
+          <button class="tab" type="button" data-action="read-file">Read File</button>
+        </div>
+
+        <section class="action-form" id="echo-form">
+          <label>
+            <span>Text to echo</span>
+            <input id="echo-text" type="text" value="hello from c# server" maxlength="120" />
+          </label>
+        </section>
+
+        <section class="action-form hidden" id="create-file-form">
+          <label>
+            <span>Filename</span>
+            <input id="file-name" type="text" value="demo.txt" maxlength="80" placeholder="hello.txt" />
+          </label>
+          <label>
+            <span>Content</span>
+            <textarea id="file-content" rows="6" maxlength="500">Hello from my HTTP server</textarea>
+          </label>
+        </section>
+
+        <section class="action-form hidden" id="read-file-form">
+          <label>
+            <span>Filename to read</span>
+            <input id="read-file-name" type="text" value="demo.txt" maxlength="80" placeholder="hello.txt" />
+          </label>
+        </section>
+
+        <div class="request-meta">
+          <span class="meta-label">Method</span>
+          <span id="method-display">GET</span>
+        </div>
+
+        <button class="send-button" type="button" id="send-button">Send Request</button>
+      </div>
+
+      <div class="panel panel-right">
+        <header class="panel-header response-header">
+          <h2>RESPONSE</h2>
+          <span id="status-pill" class="status-pill waiting">idle</span>
+        </header>
+
+        <div class="response-block">
+          <div class="response-section">
+            <div class="section-label">Request</div>
+            <pre id="request-output">GET /echo/hello%20from%20c%23%20server HTTP/1.1
+Host: localhost
+User-Agent: HTTP Playground</pre>
+          </div>
+
+          <div class="response-section">
+            <div class="section-label">Response</div>
+            <pre id="response-output">Waiting for a request...</pre>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
