@@ -75,28 +75,30 @@ internal sealed class HttpServer : TcpServer
             return HttpResponce.BadRequest(ServerHttpVersion);
         }
 
-        if (request.RequestUri == Routes.Base || request.RequestUri == "/index.html")
+        var path = request.RequestUri.Split('?', 2)[0];
+
+        if (path == Routes.Base || path == "/index.html")
         {
             return ServeStaticFile("index.html");
         }
 
-        if (request.RequestUri.StartsWith("/style.css", StringComparison.OrdinalIgnoreCase) ||
-            request.RequestUri.StartsWith("/app.js", StringComparison.OrdinalIgnoreCase))
+        if (path.StartsWith("/style.css", StringComparison.OrdinalIgnoreCase) ||
+            path.StartsWith("/app.js", StringComparison.OrdinalIgnoreCase))
         {
-            var fileName = request.RequestUri.TrimStart('/');
+            var fileName = path.TrimStart('/');
             return ServeStaticFile(fileName);
         }
 
-        if (request.RequestUri.StartsWith(Routes.Echo, StringComparison.OrdinalIgnoreCase))
+        if (path.StartsWith(Routes.Echo, StringComparison.OrdinalIgnoreCase))
         {
-            var text = request.RequestUri[Routes.Echo.Length..];
+            var text = path[Routes.Echo.Length..];
             var decoded = Uri.UnescapeDataString(text);
             var body = decoded ?? string.Empty;
             var headers = HttpHeaders.GetHeaders(HttpHeaders.TextPlain, body.Length);
             return HttpResponce.Ok(ServerHttpVersion, headers, body);
         }
 
-        if (request.RequestUri.StartsWith(Routes.Files, StringComparison.OrdinalIgnoreCase))
+        if (path.StartsWith(Routes.Files, StringComparison.OrdinalIgnoreCase))
         {
             return HandleFiles(request);
         }
