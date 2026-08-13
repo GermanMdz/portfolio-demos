@@ -41,6 +41,7 @@ build/Release
 node_modules/
 jspm_packages/
 proyectos_reales/
+demos/http-server/http_server/obj/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
