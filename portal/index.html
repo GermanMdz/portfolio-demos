@@ -28,8 +28,8 @@
           <div class="hero-links">
             <a href="https://github.com/GermanMdz" target="_blank" rel="noopener noreferrer">GitHub<span
                 class="arrow">↗</span></a>
-            <a href="https://www.linkedin.com/in/germ%C3%A1n-mendoza-3aba8716b" target="_blank" rel="noopener noreferrer">LinkedIn<span
-                class="arrow">↗</span></a>
+            <a href="https://www.linkedin.com/in/germ%C3%A1n-mendoza-3aba8716b" target="_blank"
+              rel="noopener noreferrer">LinkedIn<span class="arrow">↗</span></a>
           </div>
         </div>
 
@@ -127,7 +127,8 @@
           <div class="spread-actions">
             <button class="btn-solid" data-demo-url="/demos/inscripcion-ferias/"
               data-demo-title="Sistema de Inscripción a Ferias Municipales" type="button">Ver demo</button>
-            <a href="https://github.com/GermanMdz/inscripcion_ferias" class="btn-line" target="_blank" rel="noopener noreferrer">Ver código</a>
+            <a href="https://github.com/GermanMdz/inscripcion_ferias" class="btn-line" target="_blank"
+              rel="noopener noreferrer">Ver código</a>
           </div>
         </div>
       </article>
@@ -176,7 +177,8 @@
           <div class="spread-actions">
             <button class="btn-solid" data-demo-url="/demos/ia/" data-demo-title="Clasificador de Números Manuscritos"
               type="button">Ver demo</button>
-            <a href="https://github.com/GermanMdz/ai" class="btn-line" target="_blank" rel="noopener noreferrer">Ver código</a>
+            <a href="https://github.com/GermanMdz/ai" class="btn-line" target="_blank" rel="noopener noreferrer">Ver
+              código</a>
           </div>
         </div>
       </article>
@@ -201,7 +203,8 @@
         <div class="spread-info">
           <span class="spread-index">03</span>
           <h3 class="spread-title">HTTP Server + Playground</h3>
-          <p class="spread-desc">Servidor HTTP en C#. La demo muestra las funcionalidades de echo, creación y lectura de archivos.</p>
+          <p class="spread-desc">Servidor HTTP en C#. La demo muestra las funcionalidades de echo, creación y lectura de
+            archivos.</p>
 
           <ul class="tag-row" aria-label="Tecnologías utilizadas">
             <li class="tag"><span class="tag-mark">C#</span>.NET</li>
@@ -212,64 +215,47 @@
           <div class="spread-actions">
             <button class="btn-solid" data-demo-url="/demos/http-server/" data-demo-title="HTTP Server Playground"
               type="button">Ver demo</button>
-            <a href="https://github.com/GermanMdz/http-server" class="btn-line" target="_blank" rel="noopener noreferrer">Ver código</a>
+            <a href="https://github.com/GermanMdz/http-server" class="btn-line" target="_blank"
+              rel="noopener noreferrer">Ver código</a>
           </div>
         </div>
       </article>
     </section>
 
-    <!-- ===================== PROCESO =====================
-    <section class="process" id="process" data-reveal>
+    <!-- ===================== PROCESO =====================-->
+    <section class="" id="process" data-reveal>
       <p class="section-eyebrow">cómo construí esto</p>
-      <h2 class="process-title">De un proyecto real a una demo publicada</h2>
+      <div class="process-content">
+        <div class="process-walkthrough">
+          <div class="process-steps" id="process-steps">
+            <div class="process-step" data-step="1">
+              <h3 class="process-step-title">Mi portfolio</h3>
+              <p class="process-step-text">Quería que el portfolio no dependiera de que yo mantenga todo a mano. La
+                solución: Vercel sirve el portal estático (HTML/CSS/JS puro), y cada demo corre aislada en su propio
+                contenedor Docker, alojado en Cloud Run.</p>
+            </div>
+            <div class="process-step" data-step="2" hidden>
+              <h3 class="process-step-title">Contexto para la IA</h3>
+              <p class="process-step-text">Subo fragmentos reales de la lógica de negocio de cada repositorio, y le
+                describo a la IA qué funcionalidades puntuales quiero que la demo refleje, así extrae sólo lo necesario,
+                sin arrastrar la complejidad completa del proyecto original.</p>
+            </div>
+            <div class="process-step" data-step="3" hidden>
+              <h3 class="process-step-title">De proyecto terminado a demo publicada</h3>
+              <p class="process-step-text">Cuando cierro un proyecto real, le doy el objetivo a la IA y en minutos tengo
+                un contenedor demo funcional, listo para sumarse al portfolio.</p>
+            </div>
+          </div>
 
-      <div class="pipeline">
-        <div class="pipeline-node">
-          <p class="pipeline-tag">fuente</p>
-          <p class="pipeline-label">Proyecto original</p>
-          <p class="pipeline-desc">Repositorio real, con su lógica completa.</p>
+          <div class="process-progress" aria-hidden="true">
+            <span class="process-progress-seg is-active" data-seg="1"></span>
+            <span class="process-progress-seg" data-seg="2"></span>
+            <span class="process-progress-seg" data-seg="3"></span>
+          </div>
         </div>
-        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-        <div class="pipeline-node">
-          <p class="pipeline-tag">contexto</p>
-          <p class="pipeline-label">Objetivo de la demo</p>
-          <p class="pipeline-desc">Le indico a la IA qué debe mostrar y qué simplificar.</p>
-        </div>
-        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-        <div class="pipeline-node">
-          <p class="pipeline-tag">resultado</p>
-          <p class="pipeline-label">Demo adaptada</p>
-          <p class="pipeline-desc">Versión reducida, aislada y funcional.</p>
-        </div>
-        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-        <div class="pipeline-node">
-          <p class="pipeline-tag">empaquetado</p>
-          <p class="pipeline-label"><span class="tag-mark tag-mark--inline">Do</span>Container</p>
-          <p class="pipeline-desc">Cada demo corre en su propio contenedor Docker.</p>
-        </div>
-        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-        <div class="pipeline-node pipeline-node--final">
-          <p class="pipeline-tag">publicación</p>
-          <p class="pipeline-label">Portfolio</p>
-          <p class="pipeline-desc">Todo se sirve bajo una misma dirección, a través de un gateway.</p>
-        </div>
+        <button class="btn-line process-next" id="process-next" type="button">Siguiente</button>
       </div>
-
-      <div class="notes-grid">
-        <div class="note">
-          <h4>Pensada para crecer</h4>
-          <p>Agregar un nuevo proyecto no implica rehacer el sistema: alcanza con sumar un contenedor y una ruta en el gateway.</p>
-        </div>
-        <div class="note">
-          <h4>IA como herramienta, no como autor</h4>
-          <p>Para cada demo le doy a la IA el repositorio original y el objetivo puntual. El resultado lo reviso y ajusto yo.</p>
-        </div>
-      </div>
-    </section> -->
+    </section>
 
     <!-- ===================== CONTACTO ===================== -->
     <section class="process" id="contact" data-reveal>

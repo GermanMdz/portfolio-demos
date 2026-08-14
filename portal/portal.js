@@ -102,3 +102,45 @@ if (!prefersReducedMotion && "IntersectionObserver" in window && revealTargets.l
 
   revealTargets.forEach((el) => observer.observe(el));
 }
+
+/* ---- Process walkthrough ---- */
+const processSteps = document.querySelectorAll(".process-step");
+const processNext = document.getElementById("process-next");
+const processSegs = document.querySelectorAll(".process-progress-seg");
+let currentStep = 1;
+
+function updateProcessStep() {
+  processSteps.forEach((step) => {
+    const stepNum = Number(step.dataset.step);
+    if (stepNum < currentStep) {
+      step.hidden = false;
+      step.classList.add("is-read");
+    } else if (stepNum === currentStep) {
+      step.hidden = false;
+      step.classList.remove("is-read");
+    } else {
+      step.hidden = true;
+    }
+  });
+
+  processSegs.forEach((seg) => {
+    const segNum = Number(seg.dataset.seg);
+    seg.classList.toggle("is-active", segNum === currentStep);
+    seg.classList.toggle("is-done", segNum < currentStep);
+  });
+
+  if (currentStep >= processSteps.length) {
+    processNext.disabled = true;
+    processNext.textContent = "Fin";
+  }
+}
+
+if (processNext) {
+  processNext.addEventListener("click", () => {
+    if (currentStep < processSteps.length) {
+      currentStep += 1;
+      updateProcessStep();
+    }
+  });
+  updateProcessStep();
+}
