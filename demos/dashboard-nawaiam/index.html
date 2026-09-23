@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Nawaiam</title>
+    <style>
+      :root {
+        --bg: #eff4fb;
+        --panel: #ffffff;
+        --panel-soft: #f5f7fb;
+        --panel-strong: #edf3ff;
+        --line: #dfe7f2;
+        --line-strong: #c6d3ea;
+        --text: #10233d;
+        --text-soft: #53667f;
+        --muted: #7c8ea3;
+        --accent: #3563e9;
+        --accent-2: #14b8a6;
+        --accent-3: #9b8cff;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --shadow: 0 18px 40px rgba(17, 24, 39, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(160deg, #edf3ff 0%, #eff5ff 35%, #edf4fb 100%);
+        color: var(--text);
+      }
+
+      body {
+        padding: 32px;
+      }
+
+      .dashboard-shell {
+        max-width: 1420px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.75);
+        border: 1px solid rgba(164, 184, 214, 0.5);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        overflow: hidden;
+      }
+
+      .dashboard-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 780px;
+      }
+
+      .sidebar {
+        background: linear-gradient(180deg, #f4f7fd 0%, #eef4ff 100%);
+        border-right: 1px solid var(--line);
+        padding: 26px 18px 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 10px 18px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #16388f 0%, #2b6cf2 40%, #5bb7ff 100%);
+        position: relative;
+        box-shadow: inset 0 0 0 2px rgba(255,255,255,0.5);
+      }
+
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.24);
+      }
+
+      .brand-name {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .sidebar-title {
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        padding: 6px 10px 12px;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-item {
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        border-radius: 12px;
+        padding: 12px 12px;
+        text-align: left;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-soft);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-item:hover:not(:disabled) {
+        background: rgba(53, 99, 233, 0.06);
+        border-color: rgba(53, 99, 233, 0.22);
+      }
+
+      .nav-item.is-active {
+        background: linear-gradient(135deg, rgba(53,99,233,0.12), rgba(20,184,166,0.08));
+        border-color: rgba(53,99,233,0.2);
+        color: var(--text);
+        box-shadow: inset 0 0 0 1px rgba(53,99,233,0.1);
+      }
+
+      .nav-item:disabled {
+        color: var(--muted);
+        background: rgba(148, 163, 184, 0.08);
+        border-color: rgba(148, 163, 184, 0.15);
+        cursor: not-allowed;
+      }
+
+      .nav-item .lock {
+        float: right;
+        font-size: 0.74rem;
+        opacity: 0.8;
+      }
+
+      .sidebar-note {
+        margin-top: 18px;
+        background: rgba(245, 158, 11, 0.08);
+        color: #8a5a00;
+        border: 1px solid rgba(245, 158, 11, 0.18);
+        border-radius: 12px;
+        padding: 12px 10px;
+        font-size: 0.76rem;
+        line-height: 1.5;
+      }
+
+      .content {
+        background: linear-gradient(180deg, #f9fbff 0%, #f5f9ff 100%);
+        padding: 22px 26px 28px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+        padding: 10px 4px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar h1 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+        letter-spacing: -0.04em;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .month-select {
+        appearance: none;
+        border: 1px solid var(--line-strong);
+        background: var(--panel);
+        border-radius: 12px;
+        padding: 10px 42px 10px 14px;
+        font-size: 0.92rem;
+        color: var(--text);
+        outline: none;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.02);
+      }
+
+      .mini-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(20,184,166,0.1);
+        color: #0f766e;
+        border: 1px solid rgba(20,184,166,0.18);
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .mini-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        display: inline-block;
+      }
+
+      .view {
+        display: none;
+      }
+
+      .view.is-active {
+        display: block;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0 14px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: 1.12rem;
+      }
+
+      .soft-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        color: var(--text-soft);
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(160px, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .metric-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px 18px 14px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.02);
+      }
+
+      .metric-label {
+        color: var(--text-soft);
+        font-size: 0.81rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .metric-value {
+        font-size: clamp(1.35rem, 2vw, 1.9rem);
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .metric-value.positive { color: #0f766e; }
+      .metric-value.warning { color: #b45309; }
+      .metric-value.default { color: var(--text); }
+
+      .metric-sub {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .section-panels {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .panel h3 {
+        margin: 0 0 16px;
+        font-size: 1rem;
+      }
+
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        min-height: 180px;
+        height: 180px;
+        padding-top: 10px;
+      }
+
+      .bar-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        height: 100%;
+      }
+
+      .bar {
+        width: 100%;
+        max-width: 34px;
+        min-height: 12px;
+        border-radius: 12px 12px 0 0;
+        background: linear-gradient(180deg, #91c6ff 0%, #4f7cf3 100%);
+        box-shadow: inset 0 -4px 0 rgba(255,255,255,0.18);
+      }
+
+      .bar-label {
+        font-size: 0.73rem;
+        color: var(--text-soft);
+      }
+
+      .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .list-item {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 10px;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .list-item strong {
+        font-size: 0.9rem;
+      }
+
+      .list-item span {
+        color: var(--text-soft);
+        font-size: 0.77rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: rgba(53, 99, 233, 0.08);
+        color: var(--accent);
+      }
+
+      .facturas-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .facturas-table th,
+      .facturas-table td {
+        border-bottom: 1px solid var(--line);
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 0.9rem;
+      }
+
+      .facturas-table thead th {
+        background: #f6f9ff;
+        color: var(--text-soft);
+        font-weight: 700;
+      }
+
+      .facturas-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 8px;
+        border-radius: 999px;
+        background: rgba(34,197,94,0.1);
+        color: #166534;
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+
+      .status.warning {
+        background: rgba(245, 158, 11, 0.1);
+        color: #92400e;
+      }
+
+      .seller-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .ranking-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .rank-item {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+        align-items: center;
+        background: var(--panel-soft);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+
+      .rank-pos {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(53,99,233,0.1);
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 0.82rem;
+      }
+
+      .rank-meta strong {
+        display: block;
+        font-size: 0.92rem;
+      }
+
+      .rank-meta span {
+        display: block;
+        color: var(--text-soft);
+        font-size: 0.76rem;
+      }
+
+      .rank-value {
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .locked {
+        background: linear-gradient(180deg, rgba(148,163,184,0.06), rgba(241,245,249,0.9));
+        border: 1px dashed var(--line-strong);
+        border-radius: 18px;
+        padding: 26px 18px;
+        text-align: center;
+      }
+
+      .locked strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .locked p {
+        margin: 0;
+        color: var(--text-soft);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 980px) {
+        body { padding: 18px; }
+        .dashboard-layout { grid-template-columns: 1fr; }
+        .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+        .kpi-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+        .section-panels, .seller-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 560px) {
+        .topbar { flex-direction: column; align-items: flex-start; }
+        .topbar-actions { width: 100%; justify-content: space-between; }
+        .month-select { width: 100%; }
+        .kpi-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <div class="dashboard-layout">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <div class="brand-name">Nawaiam</div>
+          </div>
+
+          <div class="sidebar-title">Vista</div>
+          <nav class="nav-list" aria-label="Secciones del dashboard">
+            <button type="button" class="nav-item is-active" data-view="kpis">KPIs</button>
+            <button type="button" class="nav-item" data-view="facturas">Facturas</button>
+            <button type="button" class="nav-item" data-view="vendedores">Vendedores</button>
+            <button type="button" class="nav-item" data-view="productos" disabled>Productos <span class="lock">🔒</span></button>
+            <button type="button" class="nav-item" data-view="contratos" disabled>Contratos <span class="lock">🔒</span></button>
+            <button type="button" class="nav-item" data-view="empresas" disabled>Empresas <span class="lock">🔒</span></button>
+          </nav>
+
+          <div class="sidebar-note">
+            Demo con datos ficticios. Las vistas restantes quedan bloqueadas porque no están disponibles en esta demostración.
+          </div>
+        </aside>
+
+        <main class="content">
+          <header class="topbar">
+            <h1>Dashboard Customer &amp; Finanzas</h1>
+
+            <div class="topbar-actions">
+              <label>
+                <select id="month-select" class="month-select" aria-label="Seleccionar mes">
+                  <option value="2025-01">Enero 2025</option>
+                  <option value="2025-02">Febrero 2025</option>
+                  <option value="2025-03">Marzo 2025</option>
+                  <option value="2025-04">Abril 2025</option>
+                  <option value="2025-05" selected>Mayo 2025</option>
+                  <option value="2025-06">Junio 2025</option>
+                  <option value="2025-07">Julio 2025</option>
+                  <option value="2025-08">Agosto 2025</option>
+                  <option value="2025-09">Septiembre 2025</option>
+                  <option value="2025-10">Octubre 2025</option>
+                  <option value="2025-11">Noviembre 2025</option>
+                  <option value="2025-12">Diciembre 2025</option>
+                </select>
+              </label>
+              <span class="mini-badge">Finnegans</span>
+            </div>
+          </header>
+
+          <section class="view is-active" data-panel="kpis">
+            <div class="section-header">
+              <h2>KPIs principales</h2>
+              <span class="soft-tag">Periodo: Mayo 2025</span>
+            </div>
+
+            <div class="kpi-grid">
+              <article class="metric-card">
+                <div class="metric-label">Ingresos netos</div>
+                <div class="metric-value positive" data-kpi="netRevenue">$152.4K</div>
+                <div class="metric-sub">+14.2% vs. mes anterior</div>
+              </article>
+
+              <article class="metric-card">
+                <div class="metric-label">Facturas emitidas</div>
+                <div class="metric-value default" data-kpi="invoices">1,284</div>
+                <div class="metric-sub">89 facturas diarias promedio</div>
+              </article>
+
+              <article class="metric-card">
+                <div class="metric-label">Clientes nuevos</div>
+                <div class="metric-value warning" data-kpi="newClients">214</div>
+                <div class="metric-sub">+18 clientes vs. mes pasado</div>
+              </article>
+
+              <article class="metric-card">
+                <div class="metric-label">Ticket promedio</div>
+                <div class="metric-value default" data-kpi="avgTicket">$1.2K</div>
+                <div class="metric-sub">Q promedio del segmento B2B</div>
+              </article>
+            </div>
+
+            <div class="section-panels">
+              <article class="panel">
+                <h3>Ingresos por mes</h3>
+                <div class="bars" id="monthly-bars" aria-label="Ingresos por mes"></div>
+              </article>
+
+              <article class="panel">
+                <h3>Foco del negocio</h3>
+                <ul class="list">
+                  <li class="list-item">
+                    <div>
+                      <strong>Retention</strong>
+                      <span>Clientes activos recurrentes</span>
+                    </div>
+                    <span class="pill">87%</span>
+                    <strong>+3.1 pts</strong>
+                  </li>
+                  <li class="list-item">
+                    <div>
+                      <strong>Churn</strong>
+                      <span>Clientes que no repitieron</span>
+                    </div>
+                    <span class="pill">9.2%</span>
+                    <strong>-0.8 pts</strong>
+                  </li>
+                  <li class="list-item">
+                    <div>
+                      <strong>LTV</strong>
+                      <span>Valor estimado de vida</span>
+                    </div>
+                    <span class="pill">$18.6K</span>
+                    <strong>+11.4%</strong>
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" data-panel="facturas">
+            <div class="section-header">
+              <h2>Facturas</h2>
+              <span class="soft-tag">Últimas operaciones</span>
+            </div>
+
+            <table class="facturas-table" aria-label="Listado de facturas">
+              <thead>
+                <tr>
+                  <th>Factura</th>
+                  <th>Cliente</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Monto</th>
+                </tr>
+              </thead>
+              <tbody id="invoices-table"></tbody>
+            </table>
+          </section>
+
+          <section class="view" data-panel="vendedores">
+            <div class="section-header">
+              <h2>Vendedores</h2>
+              <span class="soft-tag">Top del mes</span>
+            </div>
+
+            <div class="seller-grid">
+              <article class="panel">
+                <h3>Ranking</h3>
+                <div class="ranking-list" id="ranking-list"></div>
+              </article>
+
+              <article class="panel">
+                <h3>Resumen</h3>
+                <ul class="list">
+                  <li class="list-item">
+                    <div>
+                      <strong>Ventas cerradas</strong>
+                      <span>Mes actual</span>
+                    </div>
+                    <span class="pill">338</span>
+                    <strong>$21.4K</strong>
+                  </li>
+                  <li class="list-item">
+                    <div>
+                      <strong>Promedio por vendedor</strong>
+                      <span>Ingresos</span>
+                    </div>
+                    <span class="pill">$2.8K</span>
+                    <strong>+9.1%</strong>
+                  </li>
+                  <li class="list-item">
+                    <div>
+                      <strong>Mejor desempeño</strong>
+                      <span>Segmento</span>
+                    </div>
+                    <span class="pill">B2B</span>
+                    <strong>67%</strong>
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" data-panel="productos">
+            <div class="locked">
+              <strong>Productos no disponible en la demo</strong>
+              <p>Esta vista queda deshabilitada en la versión de demostración para mantener el flujo centrado en KPIs, facturas y vendedores.</p>
+            </div>
+          </section>
+
+          <section class="view" data-panel="contratos">
+            <div class="locked">
+              <strong>Contratos no disponible en la demo</strong>
+              <p>La información de contratos no se incluye en esta versión ficticia del dashboard.</p>
+            </div>
+          </section>
+
+          <section class="view" data-panel="empresas">
+            <div class="locked">
+              <strong>Empresas no disponible en la demo</strong>
+              <p>Esta vista está pensada para uso interno de Finnegans y no forma parte de la demo pública.</p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const dashboardData = {
+        '2025-01': {
+          netRevenue: '$112.8K',
+          invoices: '1,028',
+          newClients: '176',
+          avgTicket: '$1.1K',
+          monthlyBars: [62, 78, 74, 58, 82, 86, 70],
+          invoicesRows: [
+            ['FAC-00148', 'Nativa', '2025-01-17', 'Pagada', '$4,200'],
+            ['FAC-00152', 'M2M Studio', '2025-01-19', 'Pagada', '$5,900'],
+            ['FAC-00160', 'Vitruvia', '2025-01-22', 'Pendiente', '$3,700'],
+            ['FAC-00163', 'Aurelia', '2025-01-28', 'Pagada', '$8,100']
+          ],
+          rankings: [
+            ['Lucía Romero', '24 ventas', '$7.8K'],
+            ['Mateo Silva', '21 ventas', '$6.6K'],
+            ['Diego Vera', '18 ventas', '$5.7K']
+          ]
+        },
+        '2025-02': {
+          netRevenue: '$116.4K',
+          invoices: '1,076',
+          newClients: '183',
+          avgTicket: '$1.1K',
+          monthlyBars: [58, 74, 82, 68, 90, 84, 76],
+          invoicesRows: [
+            ['FAC-00210', 'North Peak', '2025-02-03', 'Pagada', '$4,800'],
+            ['FAC-00218', 'Flow Labs', '2025-02-11', 'Pagada', '$6,100'],
+            ['FAC-00234', 'Natura One', '2025-02-16', 'Pendiente', '$4,350'],
+            ['FAC-00246', 'Astra', '2025-02-26', 'Pagada', '$7,460']
+          ],
+          rankings: [
+            ['Lucía Romero', '25 ventas', '$8.1K'],
+            ['Marina Costa', '23 ventas', '$7.2K'],
+            ['Diego Vera', '20 ventas', '$6.2K']
+          ]
+        },
+        '2025-03': {
+          netRevenue: '$124.7K',
+          invoices: '1,142',
+          newClients: '195',
+          avgTicket: '$1.2K',
+          monthlyBars: [61, 78, 85, 82, 94, 88, 79],
+          invoicesRows: [
+            ['FAC-00306', 'Brixton', '2025-03-06', 'Pagada', '$5,140'],
+            ['FAC-00317', 'Nácar', '2025-03-12', 'Pagada', '$6,200'],
+            ['FAC-00325', 'Mecano', '2025-03-18', 'Pendiente', '$4,800'],
+            ['FAC-00339', 'Boreal', '2025-03-31', 'Pagada', '$8,930']
+          ],
+          rankings: [
+            ['Lucía Romero', '26 ventas', '$8.9K'],
+            ['Mateo Silva', '24 ventas', '$7.9K'],
+            ['Marina Costa', '22 ventas', '$7.1K']
+          ]
+        },
+        '2025-04': {
+          netRevenue: '$137.8K',
+          invoices: '1,203',
+          newClients: '201',
+          avgTicket: '$1.2K',
+          monthlyBars: [70, 86, 92, 84, 98, 96, 90],
+          invoicesRows: [
+            ['FAC-00408', 'Nativa', '2025-04-04', 'Pagada', '$5,250'],
+            ['FAC-00414', 'Oberon', '2025-04-09', 'Pagada', '$6,440'],
+            ['FAC-00429', 'Astra', '2025-04-20', 'Pendiente', '$5,120'],
+            ['FAC-00441', 'Yoogle', '2025-04-29', 'Pagada', '$9,040']
+          ],
+          rankings: [
+            ['Lucía Romero', '28 ventas', '$9.6K'],
+            ['Mateo Silva', '25 ventas', '$8.7K'],
+            ['Marina Costa', '24 ventas', '$8.2K']
+          ]
+        },
+        '2025-05': {
+          netRevenue: '$152.4K',
+          invoices: '1,284',
+          newClients: '214',
+          avgTicket: '$1.2K',
+          monthlyBars: [72, 88, 96, 90, 106, 112, 98],
+          invoicesRows: [
+            ['FAC-00514', 'Luz Alba', '2025-05-02', 'Pagada', '$5,620'],
+            ['FAC-00523', 'Oberon', '2025-05-09', 'Pagada', '$6,900'],
+            ['FAC-00539', 'Cecilia', '2025-05-17', 'Pendiente', '$4,500'],
+            ['FAC-00552', 'M2M Studio', '2025-05-28', 'Pagada', '$10,150']
+          ],
+          rankings: [
+            ['Lucía Romero', '31 ventas', '$10.8K'],
+            ['Mateo Silva', '28 ventas', '$9.9K'],
+            ['Marina Costa', '26 ventas', '$9.1K']
+          ]
+        },
+        '2025-06': {
+          netRevenue: '$160.1K',
+          invoices: '1,332',
+          newClients: '219',
+          avgTicket: '$1.3K',
+          monthlyBars: [76, 92, 104, 95, 112, 118, 103],
+          invoicesRows: [
+            ['FAC-00602', 'Aurelia', '2025-06-04', 'Pagada', '$6,280'],
+            ['FAC-00616', 'Flow Labs', '2025-06-11', 'Pagada', '$7,180'],
+            ['FAC-00623', 'Vitruvia', '2025-06-19', 'Pendiente', '$5,350'],
+            ['FAC-00635', 'Nativa', '2025-06-30', 'Pagada', '$10,980']
+          ],
+          rankings: [
+            ['Lucía Romero', '32 ventas', '$11.4K'],
+            ['Mateo Silva', '29 ventas', '$10.4K'],
+            ['Marina Costa', '27 ventas', '$9.7K']
+          ]
+        }
+      };
+
+      const monthSelect = document.getElementById('month-select');
+      const kpiEls = {
+        netRevenue: document.querySelector('[data-kpi="netRevenue"]'),
+        invoices: document.querySelector('[data-kpi="invoices"]'),
+        newClients: document.querySelector('[data-kpi="newClients"]'),
+        avgTicket: document.querySelector('[data-kpi="avgTicket"]')
+      };
+
+      const monthlyBars = document.getElementById('monthly-bars');
+      const facturasTbody = document.getElementById('invoices-table');
+      const rankingList = document.getElementById('ranking-list');
+      const scopeTag = document.querySelector('.soft-tag');
+
+      function renderMonth() {
+        const key = monthSelect.value;
+        const data = dashboardData[key] || dashboardData['2025-05'];
+        const monthLabel = monthSelect.options[monthSelect.selectedIndex].text;
+
+        const safeMonthlyBars = Array.isArray(data.monthlyBars) && data.monthlyBars.length ? data.monthlyBars : [72, 88, 96, 90, 106, 112, 98];
+        const safeInvoicesRows = Array.isArray(data.invoicesRows) && data.invoicesRows.length ? data.invoicesRows : [];
+        const safeRankings = Array.isArray(data.rankings) && data.rankings.length ? data.rankings : [];
+
+        kpiEls.netRevenue.textContent = data.netRevenue || '$0K';
+        kpiEls.invoices.textContent = data.invoices || '0';
+        kpiEls.newClients.textContent = data.newClients || '0';
+        kpiEls.avgTicket.textContent = data.avgTicket || '$0K';
+        scopeTag.textContent = `Periodo: ${monthLabel}`;
+
+        const months = ['E', 'F', 'M', 'A', 'M', 'J', 'J'];
+        monthlyBars.innerHTML = safeMonthlyBars.map((value, index) => {
+          const safeValue = Number(value) || 0;
+          const normalizedHeight = Math.min(Math.max(safeValue, 8), 100);
+          return `
+            <div class="bar-col">
+              <div class="bar" style="height:${normalizedHeight}%"></div>
+              <span class="bar-label">${months[index] || ''}</span>
+            </div>
+          `;
+        }).join('');
+
+        facturasTbody.innerHTML = safeInvoicesRows.map(([factura, cliente, fecha, estado, monto]) => `
+          <tr>
+            <td>${factura}</td>
+            <td>${cliente}</td>
+            <td>${fecha}</td>
+            <td><span class="status ${estado === 'Pendiente' ? 'warning' : ''}">${estado}</span></td>
+            <td>${monto}</td>
+          </tr>
+        `).join('');
+
+        rankingList.innerHTML = safeRankings.map(([name, sales, total], index) => `
+          <div class="rank-item">
+            <span class="rank-pos">${index + 1}</span>
+            <div class="rank-meta">
+              <strong>${name}</strong>
+              <span>${sales}</span>
+            </div>
+            <div class="rank-value">${total}</div>
+          </div>
+        `).join('');
+      }
+
+      monthSelect.addEventListener('change', renderMonth);
+
+      const navItems = document.querySelectorAll('.nav-item');
+      const views = document.querySelectorAll('.view');
+
+      navItems.forEach((button) => {
+        if (button.disabled) return;
+        button.addEventListener('click', () => {
+          const target = button.dataset.view;
+          navItems.forEach((item) => item.classList.toggle('is-active', item === button));
+          views.forEach((view) => view.classList.toggle('is-active', view.dataset.panel === target));
+        });
+      });
+
+      renderMonth();
+    </script>
+  </body>
+</html>

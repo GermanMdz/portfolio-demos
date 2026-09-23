@@ -10,6 +10,7 @@ services:
     depends_on:
       - inscripcion-ferias
       - ia
+      - dashboard-nawaiam
       - http-server
 
   inscripcion-ferias:
@@ -23,6 +24,12 @@ services:
       context: ./demos/ia
     expose:
       - "5000"
+
+  dashboard-nawaiam:
+    build:
+      context: ./demos/dashboard-nawaiam
+    expose:
+      - "5003"
 
   http-server:
     build:
